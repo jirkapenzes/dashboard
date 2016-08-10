@@ -1,8 +1,8 @@
 FROM kyma/docker-nginx
 
-COPY index.html /usr/share/nginx/html
-COPY jquery.min.js /usr/share/nginx/html
-COPY masonry.pkgd.js /usr/share/nginx/html
-COPY imagesloaded.pkgd.js /usr/share/nginx/html
+COPY index.html /var/www/index.html
+COPY jquery.min.js /var/www/nginx/html
+COPY masonry.pkgd.js /var/www/nginx/html
+COPY imagesloaded.pkgd.js /var/www/nginx/html
 
 CMD 'nginx'
