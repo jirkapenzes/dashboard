@@ -24,6 +24,7 @@ app.get('/photos', function (req, res) {
                 for (i = 0; i < response.data.length; i++) {
                     result.push({image: response.data[i].images[2].source});
                 }
+                shuffle(result);
                 res.send(result)
             }
         }
@@ -35,5 +36,19 @@ console.log('Server started on port ' + port);
 
 app.listen(port);
 
+
+/**
+ * Shuffles array in place.
+ * @param {Array} a items The array containing the items.
+ */
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
+}
 
 
