@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='jquery.min.js'></script>
+  <script src='masonry.pkgd.js'></script>
+  <script src='imagesloaded.pkgd.js'></script>
+</head>
+
+  <style>
+  * { box-sizing: border-box; }
+
+  /* force scrollbar */
+  html { overflow-y: scroll; }
+
+  body { font-family: sans-serif; }
+
+  /* ---- grid ---- */
+
+  .grid {
+    background: #DDD;
+  }
+
+  /* clear fix */
+  .grid:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  /* ---- .grid-item ---- */
+
+  .grid-sizer,
+  .grid-item {
+    width: 20%;
+  }
+
+  .grid-item {
+    float: left;
+  }
+
+  .grid-item img {
+    display: block;
+    max-width: 100%;
+  }
+
+
+  img {
+    border: solid 2px white;
+  }
+
+  </style>
+<body>
+
+
+  <div id="grid" class="grid">
+    <div class="grid-sizer"></div>
+
+  </div>
+
+  <script>
+  var grid = document.querySelector('.grid');
+
+var msnry = new Masonry( grid, {
+itemSelector: '.grid-item',
+columnWidth: '.grid-sizer',
+percentPosition: true
+});
+
+imagesLoaded( grid ).on( 'progress', function() {
+msnry.layout();
+});
+
+
+    function getItemElement() {
+      var elem = document.createElement('div');
+      elem.className = 'grid-item';
+
+      var img = document.createElement('img');
+      img.src = 'images/5.jpg';
+      elem.appendChild(img);
+      elem.style = '';
+
+      return elem;
+    }
+
+    function createImageElement(imageUrl) {
+      var element = document.createElement('div');
+      var image = document.createElement('img');
+      image.src = imageUrl;
+      element.className = 'grid-item';
+      element.appendChild(image);
+      return element;
+    }
+
+
+
+function removeAllImages() {
+  var myNode = document.getElementById("grid");
+  while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+  }
+}
+
+// removeAllImages();
+  $.getJSON("http://dashboard-backend.dev.topmonks.com/photos", function(result){
+    var elems = [];
+    var fragment = document.createDocumentFragment();
+
+    result.forEach(function(item){
+      var imageUrl = item.image;
+      var elem = createImageElement(imageUrl);
+      fragment.appendChild( elem );
+      elems.push(elem);
+    });
+
+    grid.appendChild( fragment );
+    msnry.appended( elems );
+  });
+
+  //msnry.layout();
+
+  </script>
+
+</body>
+
+</html>
