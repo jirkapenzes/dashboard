@@ -5,6 +5,7 @@
   "description": "Dashboard for images",
   "main": "dashboard.js",
   "dependencies": {
+    "cors": "^2.7.1",
     "express": "~4.13.4",
     "fb": "^1.1.1",
     "morgan": "~1.7.0"
