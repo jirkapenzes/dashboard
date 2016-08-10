@@ -72,19 +72,6 @@ imagesLoaded( grid ).on( 'progress', function() {
 msnry.layout();
 });
 
-
-    function getItemElement() {
-      var elem = document.createElement('div');
-      elem.className = 'grid-item';
-
-      var img = document.createElement('img');
-      img.src = 'images/5.jpg';
-      elem.appendChild(img);
-      elem.style = '';
-
-      return elem;
-    }
-
     function createImageElement(imageUrl) {
       var element = document.createElement('div');
       var image = document.createElement('img');
@@ -103,21 +90,31 @@ function removeAllImages() {
   }
 }
 
-// removeAllImages();
-  $.getJSON("http://dashboard-backend.dev.topmonks.com/photos", function(result){
-    var elems = [];
-    var fragment = document.createDocumentFragment();
+    var element = document.createElement('div');
+    element.className = 'grid-sizer'
+    var g = document.getElementById("grid");
+    g.appendChild(element);
 
-    result.forEach(function(item){
-      var imageUrl = item.image;
-      var elem = createImageElement(imageUrl);
-      fragment.appendChild( elem );
-      elems.push(elem);
+    $.getJSON("http://dashboard-backend.dev.topmonks.com/photos", function(result){
+      var elems = [];
+      var fragment = document.createDocumentFragment();
+
+      result.forEach(function(item){
+        var imageUrl = item.image;
+        var elem = createImageElement(imageUrl);
+        fragment.appendChild( elem );
+        elems.push(elem);
+      });
+
+      grid.appendChild( fragment );
+      msnry.appended( elems );
     });
 
-    grid.appendChild( fragment );
-    msnry.appended( elems );
-  });
+window.setTimeout(function(){
+location.reload();
+}, 300000);
+
+
 
   //msnry.layout();
 
