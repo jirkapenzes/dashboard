@@ -4,8 +4,10 @@ services:
   - docker
 
 script:
+  - docker build -t jirkapenzes/dashboard-frontend frontend
   - docker build -t jirkapenzes/dashboard-backend backend
 
 after_success:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker push jirkapenzes/dashboard-backend
+  - docker push jirkapenzes/dashboard-frontend
