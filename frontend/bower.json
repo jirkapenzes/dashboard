@@ -1,10 +1,6 @@
 {
   "name": "Dashboard",
   "homepage": "https://github.com/jirkapenzes/dashboard",
-  "authors": [
-    "Jirka Pénzeš <jirkapenzes@gmail.com>"
-  ],
-  "description": "Photo dashboard",
   "ignore": [
     "bower_components"
   ],
