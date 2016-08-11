@@ -3,6 +3,10 @@ language: node_js
 services:
   - docker
 
+before_script:
+  - npm install -g bower
+  - bower install
+
 script:
   - docker build -t jirkapenzes/dashboard-frontend frontend
   - docker build -t jirkapenzes/dashboard-backend backend
