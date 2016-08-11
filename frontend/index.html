@@ -9,27 +9,15 @@
 </head>
 
   <style>
-  * { box-sizing: border-box; }
-
-  /* force scrollbar */
-  html { overflow-y: scroll; }
-
-  body { font-family: sans-serif; }
-
-  /* ---- grid ---- */
-
   .grid {
     background: #DDD;
   }
 
-  /* clear fix */
   .grid:after {
     content: '';
     display: block;
     clear: both;
   }
-
-  /* ---- .grid-item ---- */
 
   .grid-sizer,
   .grid-item {
@@ -45,32 +33,27 @@
     max-width: 100%;
   }
 
-
   img {
     border: solid 2px white;
   }
-
   </style>
 <body>
 
-
   <div id="grid" class="grid">
     <div class="grid-sizer"></div>
-
   </div>
 
   <script>
-  var grid = document.querySelector('.grid');
+    var grid = document.querySelector('.grid');
+    var msnry = new Masonry( grid, {
+      itemSelector: '.grid-item',
+      columnWidth: '.grid-sizer',
+      percentPosition: true
+    });
 
-var msnry = new Masonry( grid, {
-itemSelector: '.grid-item',
-columnWidth: '.grid-sizer',
-percentPosition: true
-});
-
-imagesLoaded( grid ).on( 'progress', function() {
-msnry.layout();
-});
+    imagesLoaded(grid).on('progress', function() {
+      msnry.layout();
+    });
 
     function createImageElement(imageUrl) {
       var element = document.createElement('div');
@@ -81,45 +64,32 @@ msnry.layout();
       return element;
     }
 
-
-
-function removeAllImages() {
-  var myNode = document.getElementById("grid");
-  while (myNode.firstChild) {
-      myNode.removeChild(myNode.firstChild);
-  }
-}
-
-    var element = document.createElement('div');
-    element.className = 'grid-sizer'
-    var g = document.getElementById("grid");
-    g.appendChild(element);
+    function removeAllImages() {
+      var gridElement = document.getElementById("grid");
+      while (gridElement.firstChild) {
+          gridElement.removeChild(gridElement.firstChild);
+      }
+    }
 
     $.getJSON("http://dashboard-backend.dev.topmonks.com/photos", function(result){
-      var elems = [];
+      var elements = [];
       var fragment = document.createDocumentFragment();
 
       result.forEach(function(item){
         var imageUrl = item.image;
-        var elem = createImageElement(imageUrl);
-        fragment.appendChild( elem );
-        elems.push(elem);
+        var element = createImageElement(imageUrl);
+        fragment.appendChild(element);
+        elements.push(element);
       });
 
-      grid.appendChild( fragment );
-      msnry.appended( elems );
+      grid.appendChild(fragment);
+      msnry.appended(elements);
     });
 
-window.setTimeout(function(){
-location.reload();
-}, 300000);
-
-
-
-  //msnry.layout();
+    window.setTimeout(function(){
+      location.reload();
+    }, 300000);
 
   </script>
-
 </body>
-
 </html>
