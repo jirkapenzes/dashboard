@@ -17,7 +17,8 @@ app.get('/photos', function (req, res) {
     FB.api(
         "/499635510055878/photos",
         'GET',
-        {fields : 'images'},
+        {fields : 'images',
+         limit : 40},
         function (response) {
             if (response && !response.error) {
                 var result = [];
