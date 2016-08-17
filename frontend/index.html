@@ -51,10 +51,6 @@
       percentPosition: true
     });
 
-    imagesLoaded(grid).on('progress', function() {
-      msnry.layout();
-    });
-
     function createImageElement(imageUrl) {
       var element = document.createElement('div');
       var image = document.createElement('img');
@@ -84,6 +80,10 @@
 
       grid.appendChild(fragment);
       msnry.appended(elements);
+
+      imagesLoaded(grid).on('progress', function() {
+        msnry.layout();
+      });
     });
 
     window.setTimeout(function(){
