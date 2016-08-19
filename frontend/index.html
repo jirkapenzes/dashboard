@@ -19,11 +19,6 @@
     clear: both;
   }
 
-  .grid-sizer,
-  .grid-item {
-    width: 20%;
-  }
-
   .grid-item {
     float: left;
   }
@@ -44,6 +39,14 @@
   </div>
 
   <script>
+    function random(min, max) {
+      return Math.floor((Math.random() * max) + min);
+    }
+
+    var numberOfColumns = random(3, 6);
+    document.styleSheets[0].insertRule(".grid-item { width: " + (Math.floor((100 / numberOfColumns))) + "%;}", 0);
+    document.styleSheets[0].insertRule(".grid-sizer { width: " + (Math.floor((100 / numberOfColumns))) + "%;}", 0);
+
     var grid = document.querySelector('.grid');
     var msnry = new Masonry( grid, {
       itemSelector: '.grid-item',
