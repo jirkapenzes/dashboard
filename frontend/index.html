@@ -63,13 +63,6 @@
       return element;
     }
 
-    function removeAllImages() {
-      var gridElement = document.getElementById("grid");
-      while (gridElement.firstChild) {
-          gridElement.removeChild(gridElement.firstChild);
-      }
-    }
-
     $.getJSON("http://dashboard-backend.dev.topmonks.com/photos", function(result){
       var elements = [];
       var fragment = document.createDocumentFragment();
