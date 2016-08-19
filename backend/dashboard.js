@@ -13,7 +13,7 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 var facebookToken = '523889191141898%7CEzjacE2IdM6MdNH9N8m9WSWs3GQ';
-var facebookPhotos = facebook.download(facebookToken,  {fields : 'images', limit : 5});
+var facebookPhotos = facebook.download(facebookToken,  {fields : 'images', limit : 40});
 
 app.get('/photos', function (req, res) {
   facebookPhotos.then(function (photos) {
