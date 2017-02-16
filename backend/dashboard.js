@@ -22,7 +22,7 @@ app.get('/photos', function (req, res) {
   });
 });
 
-var port = process.env.PORT || 3001;
+var port = process.env.PORT || 3003;
 console.log('Server started on port ' + port);
 
 app.listen(port);
