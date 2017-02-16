@@ -9,5 +9,5 @@ COPY dashboard.js /app/
 
 RUN npm install
 
-EXPOSE 3001
+EXPOSE 3003
 ENTRYPOINT [ "node", "dashboard.js" ]
